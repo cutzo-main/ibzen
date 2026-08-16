@@ -1,0 +1,874 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root block defines the Ibzen brand palette:
+ *   Warm Cream   background  #F4F1EC  oklch(0.96 0.012 80)
+ *   Deep Navy    foreground  #0D1526  oklch(0.18 0.045 265)
+ *   Warm Brown   primary     #C99457  oklch(0.67 0.12 65)
+ *   Warm Stone   muted text  #7B7063  oklch(0.52 0.03 65)
+ *   Parchment    border      #E2DDD6  oklch(0.90 0.015 80)
+ *
+ * Rules:
+ *  - No neon colours anywhere
+ *  - No gradient text / multi-colour headings
+ *  - Warm Brown used ONLY for CTAs and links
+ *  - All colours must use oklch format
+ */
+
+@theme inline {
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-syne: "Syne", sans-serif;
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Brand navy — used as a standalone surface colour in the footer CTA */
+  --color-navy: var(--navy);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* ── Core palette ────────────────────────────────────── */
+  --background:     oklch(0.96 0.012 80);       /* Warm Cream  #F4F1EC */
+  --foreground:     oklch(0.18 0.045 265);       /* Deep Navy   #0D1526 */
+  --navy:           oklch(0.18 0.045 265);       /* alias for footer dark surface */
+  --primary:        oklch(0.67 0.12 65);         /* Warm Brown  #C99457 */
+  --primary-foreground: oklch(1 0 0);            /* White */
+
+  /* ── Surface / cards ────────────────────────────────── */
+  --card:           oklch(1 0 0);                /* Pure White */
+  --card-foreground: oklch(0.18 0.045 265);
+
+  /* ── Popovers ───────────────────────────────────────── */
+  --popover:        oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.045 265);
+
+  /* ── Secondary (light tint of primary) ──────────────── */
+  --secondary:      oklch(0.93 0.02 258);
+  --secondary-foreground: oklch(0.18 0.045 265);
+
+  /* ── Muted ───────────────────────────────────────────── */
+  --muted:          oklch(0.93 0.012 80);        /* Slightly darker cream */
+  --muted-foreground: oklch(0.52 0.03 65);       /* Warm Stone  #7B7063 */
+
+  /* ── Accent = same as primary for consistency ─────────  */
+  --accent:         oklch(0.93 0.02 258);
+  --accent-foreground: oklch(0.18 0.045 265);
+
+  /* ── Destructive ─────────────────────────────────────── */
+  --destructive:    oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* ── Borders & inputs ───────────────────────────────── */
+  --border:         oklch(0.90 0.015 80);        /* Parchment   #E2DDD6 */
+  --input:          oklch(0.90 0.015 80);
+  --ring:           oklch(0.67 0.12 65);         /* Warm Brown  focus ring */
+
+  /* ── Charts ─────────────────────────────────────────── */
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  /* ── Sidebar ─────────────────────────────────────────── */
+  --sidebar:                 oklch(0.96 0.012 80);
+  --sidebar-foreground:      oklch(0.18 0.045 265);
+  --sidebar-primary:         oklch(0.67 0.12 65);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent:          oklch(0.93 0.012 80);
+  --sidebar-accent-foreground: oklch(0.18 0.045 265);
+  --sidebar-border:          oklch(0.90 0.015 80);
+  --sidebar-ring:            oklch(0.67 0.12 65);
+}
+
+/* Dark block kept inert — the app never applies .dark */
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .font-syne {
+    font-family: var(--font-syne);
+  }
+
+  .font-playfair {
+    font-family: var(--font-playfair);
+  }
+}
+
+/* =====================================================
+   KEYFRAMES
+   ===================================================== */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.35; transform: translateX(-50%) scale(1); }
+  50%       { opacity: 0.55; transform: translateX(-50%) scale(1.06); }
+}
+
+/* ── LIGHT BLUE FOG KEYFRAMES ── */
+@keyframes fog-pulse {
+  0%   { opacity: 0.35; transform: scale(1); }
+  50%  { opacity: 0.85; transform: scale(1.15) translateY(-20px); }
+  100% { opacity: 0.35; transform: scale(1); }
+}
+
+@keyframes fog-float-1 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(120px, -80px) scale(1.15); }
+  66%  { transform: translate(-60px, 50px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes fog-float-2 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  40%  { transform: translate(-100px, 120px) scale(1.2); }
+  70%  { transform: translate(80px, -60px) scale(0.85); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes fog-float-3 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  35%  { transform: translate(-120px, -120px) scale(1.1); }
+  65%  { transform: translate(90px, 80px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes fog-wave {
+  0%   { transform: translateX(-40px) translateY(0) scale(1); }
+  50%  { transform: translateX(50px) translateY(-30px) scale(1.05); }
+  100% { transform: translateX(-40px) translateY(0) scale(1); }
+}
+
+/* ── NEW KEYFRAMES ── */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-18px) rotate(1.5deg); }
+  66%       { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(12px) rotate(-1.5deg); }
+  66%       { transform: translateY(6px) rotate(1deg); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  25%       { transform: translate(8px, -12px) scale(1.04); }
+  50%       { transform: translate(-6px, -20px) scale(0.97); }
+  75%       { transform: translate(10px, -8px) scale(1.02); }
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%) skewX(-12deg); }
+  to   { transform: translateX(250%) skewX(-12deg); }
+}
+
+@keyframes border-rotate {
+  from { --angle: 0deg; }
+  to   { --angle: 360deg; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-in-spring {
+  0%   { opacity: 0; transform: scale(0.6); }
+  60%  { transform: scale(1.08); }
+  80%  { transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes draw-line {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes ripple {
+  from { transform: scale(0); opacity: 0.4; }
+  to   { transform: scale(4); opacity: 0; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+@keyframes word-reveal {
+  from { opacity: 0; transform: translateY(0.4em) rotateX(-20deg); }
+  to   { opacity: 1; transform: translateY(0) rotateX(0deg); }
+}
+
+@keyframes count-up {
+  from { opacity: 0.04; transform: translateY(12px) scale(0.94); }
+  to   { opacity: 0.12; transform: translateY(0) scale(1); }
+}
+
+@keyframes card-lift {
+  from { box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 16px rgb(0 0 0 / 0.05); }
+  to   { box-shadow: 0 8px 32px rgb(0 0 0 / 0.10), 0 24px 64px rgb(0 0 0 / 0.07); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.6; }
+}
+
+/* =====================================================
+   HERO ENTRANCE
+   ===================================================== */
+
+.hero-label {
+  animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.10s both;
+}
+
+.hero-title {
+  animation: fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+}
+
+.hero-body {
+  animation: fade-up 0.70s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both;
+}
+
+.hero-cta {
+  animation: fade-up 0.70s cubic-bezier(0.22, 1, 0.36, 1) 0.50s both;
+}
+
+.hero-rule {
+  animation: fade-in 1s ease 0.70s both;
+}
+
+/* Ambient hero glow — very subtle on light bg */
+.hero-glow {
+  animation: glow-pulse 8s ease-in-out infinite;
+}
+
+/* =====================================================
+   NAV ENTRANCE
+   ===================================================== */
+
+header {
+  animation: slide-down 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+/* Glassy border-bottom on scroll */
+.nav-scrolled {
+  border-bottom-color: color-mix(in oklab, var(--color-primary) 18%, var(--color-border));
+  box-shadow: 0 1px 24px color-mix(in oklab, var(--color-primary) 6%, transparent);
+}
+
+/* =====================================================
+   SCROLL REVEAL
+   ===================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-child {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-group.is-visible .reveal-child:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+.reveal-group.is-visible .reveal-child:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 90ms;
+}
+.reveal-group.is-visible .reveal-child:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 180ms;
+}
+.reveal-group.is-visible .reveal-child:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 270ms;
+}
+
+/* =====================================================
+   REDUCED MOTION
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .reveal,
+  .reveal-child,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* =====================================================
+   SITE CANVAS
+   Plain warm cream — no dark gradient, no neon glow.
+   A single very soft steel-blue bloom at the top is
+   the only decorative element.
+   ===================================================== */
+
+@utility site-canvas {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-background);
+  background-image:
+    radial-gradient(
+      50rem 28rem at 50% 0%,
+      color-mix(in oklab, var(--color-primary) 5%, transparent),
+      transparent 65%
+    );
+  overflow-x: hidden;
+}
+
+/* =====================================================
+   GLASS PANEL
+   White card surface on a cream page.
+   Soft parchment border, gentle shadow.
+   ===================================================== */
+
+@utility glass-panel {
+  position: relative;
+  background: var(--color-card);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-border);
+  box-shadow:
+    0 1px 2px color-mix(in oklab, var(--color-foreground) 4%, transparent),
+    0 4px 16px color-mix(in oklab, var(--color-foreground) 5%, transparent);
+}
+
+/* =====================================================
+   PREMIUM CARD
+   Elevated glass with animated shimmer on hover,
+   deeper shadow system, and glow accent.
+   ===================================================== */
+
+@utility premium-card {
+  position: relative;
+  background: var(--color-card);
+  border-radius: var(--radius-2xl);
+  border: 1px solid color-mix(in oklab, #3A6FD8 15%, var(--color-border));
+  overflow: hidden;
+  box-shadow:
+    0 1px 0px color-mix(in oklab, var(--color-foreground) 3%, transparent),
+    0 2px 4px color-mix(in oklab, var(--color-foreground) 4%, transparent),
+    0 8px 24px color-mix(in oklab, var(--color-foreground) 5%, transparent),
+    0 0 15px color-mix(in oklab, #3A6FD8 15%, transparent);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease;
+
+  &:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: color-mix(in oklab, #3A6FD8 35%, var(--color-border));
+    box-shadow:
+      0 2px 0px color-mix(in oklab, var(--color-foreground) 3%, transparent),
+      0 8px 16px color-mix(in oklab, var(--color-foreground) 6%, transparent),
+      0 24px 60px color-mix(in oklab, var(--color-foreground) 8%, transparent),
+      0 0 45px color-mix(in oklab, #3A6FD8 25%, transparent);
+  }
+
+  /* Shimmer sweep */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      color-mix(in oklab, var(--color-primary) 7%, white) 50%,
+      transparent 65%
+    );
+    transform: translateX(-100%) skewX(-12deg);
+    transition: none;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &:hover::before {
+    animation: shimmer 0.65s ease forwards;
+  }
+}
+
+/* =====================================================
+   FLOATING ORB
+   Soft animated background blob
+   ===================================================== */
+
+@utility floating-orb {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  filter: blur(60px);
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+/* =====================================================
+   SHIMMER BUTTON
+   ===================================================== */
+
+@utility shimmer-btn {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(
+      105deg,
+      transparent,
+      rgba(255, 255, 255, 0.22),
+      transparent
+    );
+    transform: translateX(-160%) skewX(-20deg);
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    animation: shimmer 0.55s ease forwards;
+  }
+}
+
+/* =====================================================
+   PULSE RING — for live indicator dots
+   ===================================================== */
+
+@utility pulse-ring {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    border: 2px solid currentColor;
+    opacity: 0;
+    animation: pulse-ring 1.8s ease-out infinite;
+  }
+}
+
+/* =====================================================
+   ANIMATED BORDER — conic gradient spin
+   ===================================================== */
+
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@utility animated-border {
+  position: relative;
+  border-radius: var(--radius-2xl);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--angle),
+      transparent 70%,
+      color-mix(in oklab, var(--color-primary) 50%, transparent) 85%,
+      transparent 100%
+    );
+    z-index: -1;
+    animation: border-rotate 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   BLUE FOG OUTLINE
+   Permanent soft glowing blue border + shadow.
+   ===================================================== */
+
+@utility blue-fog-outline {
+  border-color: color-mix(in oklab, #3A6FD8 30%, var(--color-border));
+  box-shadow: 
+    0 4px 24px color-mix(in oklab, var(--color-foreground) 3%, transparent),
+    0 0 20px color-mix(in oklab, #3A6FD8 25%, transparent);
+  transition: all 0.35s ease;
+
+  &:hover {
+    border-color: color-mix(in oklab, #3A6FD8 50%, var(--color-border));
+    box-shadow: 
+      0 8px 32px color-mix(in oklab, var(--color-foreground) 5%, transparent),
+      0 0 35px color-mix(in oklab, #3A6FD8 40%, transparent);
+  }
+}
+
+/* =====================================================
+   JOURNEY ROPE SVG PATH
+   ===================================================== */
+
+.rope-path {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  transition: stroke-dashoffset 2s cubic-bezier(0.22, 1, 0.36, 1);
+  stroke: color-mix(in oklab, var(--color-primary) 30%, transparent);
+  fill: none;
+}
+
+.rope-path.is-visible {
+  stroke-dashoffset: 0;
+}
+
+.rope-path-bg {
+  stroke: color-mix(in oklab, var(--color-primary) 5%, transparent);
+  fill: none;
+}
+
+/* =====================================================
+   PHASE NUMBER — large ghost watermark with entrance
+   ===================================================== */
+
+.phase-number {
+  animation: count-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* =====================================================
+   TEXT SHINE — kept as utility but NOT applied to
+   headings. Use text-foreground for all headings.
+   ===================================================== */
+
+@utility text-shine {
+  color: var(--color-foreground);
+}
+
+/* =====================================================
+   RULE-X — light parchment horizontal rule
+   ===================================================== */
+
+@utility rule-x {
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-border),
+    transparent
+  );
+}
+
+/* =====================================================
+   NAV LINK — underline sweep
+   ===================================================== */
+
+@utility nav-link {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+/* =====================================================
+   RIPPLE EFFECT — for button clicks
+   ===================================================== */
+
+.ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+/* =====================================================
+   TILT CARD — 3D perspective style
+   ===================================================== */
+
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease;
+  will-change: transform;
+}
+
+/* =====================================================
+   DOT GRID PATTERN — decorative background overlay
+   ===================================================== */
+
+.dot-grid {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+/* =====================================================
+   TAG PILL — decorative topic tag
+   ===================================================== */
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: color-mix(in oklab, var(--color-primary) 9%, transparent);
+  color: var(--color-primary);
+  border: 1px solid color-mix(in oklab, var(--color-primary) 18%, transparent);
+  animation: scale-in-spring 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* =====================================================
+   FLASHCARD 3D FLIP UTILITIES
+   ===================================================== */
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
