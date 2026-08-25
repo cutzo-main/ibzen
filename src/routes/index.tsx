@@ -2,14 +2,14 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { Hero } from "@/components/landing/Hero";
-import { Journey } from "@/components/landing/Journey";
-import { Pillars } from "@/components/landing/Pillars";
 import { SiteFooter } from "@/components/landing/SiteFooter";
 import { SiteNav } from "@/components/landing/SiteNav";
+import { MarqueeTicker } from "@/components/landing/MarqueeTicker";
 import { BackgroundFog } from "@/components/landing/BackgroundFog";
 
-import { AboutIbzen } from "@/components/landing/AboutIbzen";
-import { JoinInitiative } from "@/components/landing/JoinInitiative";
+import { OurBelief } from "@/components/landing/OurBelief";
+import { Journey } from "@/components/landing/Journey";
+import { RecentEvents } from "@/components/landing/RecentEvents";
 import { Members } from "@/components/landing/Members";
 import { Testimonials } from "@/components/landing/Testimonials";
 
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/")({
           name: "Ibzen",
           slogan: "Innovation. Focused.",
           description,
-          email: "hello@ibzen.org",
+          email: "hello@ibzen.in",
         }),
       },
     ],
@@ -52,14 +52,16 @@ function Index() {
       <div className="site-canvas min-h-screen">
         <BackgroundFog />
         <SiteNav />
+        {/* Spacer: 3px gold bar + 68px nav = 71px */}
+        <div style={{ height: "71px" }} aria-hidden />
+        <MarqueeTicker />
         <main className="relative z-10">
           <Hero />
-          <AboutIbzen />
-          <Pillars />
+          <OurBelief />
           <Journey />
+          <RecentEvents />
           <Members />
           <Testimonials />
-          <JoinInitiative />
         </main>
         <SiteFooter />
       </div>

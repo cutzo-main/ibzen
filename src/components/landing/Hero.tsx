@@ -66,32 +66,34 @@ export function Hero() {
 
       {/* Inspired mixed typography layout */}
       <h1 className="flex flex-col items-center gap-2" style={{ perspective: "600px" }}>
-        {/* Top line: Elegant, small, italic serif */}
-        <span className="flex flex-wrap justify-center gap-x-[0.25em] gap-y-1 font-['Playfair_Display',serif] italic font-medium text-3xl sm:text-4xl text-muted-foreground/80 tracking-wide lowercase">
+        {/* Top line: Bold, uppercase, tracking */}
+        <span className="flex flex-wrap justify-center gap-x-[0.25em] gap-y-1 font-sans font-bold text-sm sm:text-base text-primary uppercase tracking-[0.2em]">
           {line1Words.map((w, i) => (
             <HeroWord key={w + i} word={w} delay={220 + i * 80} />
           ))}
         </span>
         {/* Bottom line: Massive, bold sans-serif with tight tracking */}
-        <span className="mt-1 flex flex-wrap justify-center gap-x-[0.2em] gap-y-1 text-[clamp(3.5rem,11vw,7.5rem)] font-extrabold font-['Outfit',sans-serif] leading-[0.85] tracking-[-0.04em] text-foreground drop-shadow-sm">
+        <span className="mt-1 flex flex-wrap justify-center gap-x-[0.2em] gap-y-1 text-[clamp(3.5rem,11vw,7.5rem)] font-extrabold font-['Outfit',sans-serif] leading-[0.85] tracking-[-0.04em] text-navy drop-shadow-sm">
           {line2Words.map((w, i) => (
-            <HeroWord key={w + i} word={w} delay={420 + i * 80} />
+            <span key={w + i} className={w === "Minds." || w === "New" ? "text-gold" : ""}>
+              <HeroWord word={w} delay={420 + i * 80} />
+            </span>
           ))}
         </span>
       </h1>
 
-      <p className="hero-body mt-8 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg">
-        Connecting school dreamers with engineering mentors. We turn raw ideas
+      <p className="hero-body mt-8 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg font-sans">
+        Connecting school dreamers with engineering members. We turn raw ideas
         into real-world solutions through structured ideathons, practical
         problem-solving, and future-ready skills.
       </p>
 
-      <div className="hero-cta mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <div className="hero-cta mt-12 flex flex-col items-center justify-center gap-4 w-full sm:w-auto sm:flex-row px-4 sm:px-0">
         <a
           href="https://wa.me/919164228596"
           target="_blank"
           rel="noopener noreferrer"
-          className="shimmer-btn group inline-flex items-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-semibold tracking-tight text-primary-foreground shadow-sm transition-all duration-300 hover:scale-[1.05] hover:shadow-lg hover:shadow-primary/20"
+          className="shimmer-btn group inline-flex w-full sm:w-auto justify-center items-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-semibold tracking-tight text-primary-foreground shadow-sm transition-all duration-300 hover:scale-[1.05] hover:shadow-lg hover:shadow-primary/20 hover:bg-primary-hover"
         >
           Submit Your Idea
           <span
@@ -102,13 +104,13 @@ export function Hero() {
           </span>
         </a>
         <a
-          href="mailto:hello@ibzen.org?subject=Host at Your School"
-          className="group inline-flex items-center gap-3 rounded-full border border-border bg-background px-8 py-4 text-sm font-semibold tracking-tight text-foreground transition-all duration-300 hover:bg-card hover:border-primary/25 hover:scale-[1.05] hover:shadow-md"
+          href="mailto:hello@ibzen.in?subject=Host at Your School"
+          className="group inline-flex w-full sm:w-auto justify-center items-center gap-3 rounded-full border border-primary text-primary bg-background px-8 py-4 text-sm font-semibold tracking-tight transition-all duration-300 hover:bg-primary-hover hover:text-primary-foreground hover:scale-[1.05] hover:shadow-md"
         >
           Host at Your School
           <span
             aria-hidden
-            className="text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-foreground"
+            className="text-primary transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary-foreground"
           >
             →
           </span>

@@ -1,116 +1,90 @@
 import React from "react";
 import { useInView } from "@/hooks/useInView";
 
-// Mentor data
-const members = [
-  {
-    id: 1,
-    name: "Anirudh Nag C V",
-    academicDetails: "2nd Year CSE Student, Dr. AIT, Bengaluru",
-    photoUrl: "/images/anirudh-balaji.png",
-  },
-  {
-    id: 2,
-    name: "Charan J",
-    academicDetails: "2nd Year ECE Student, UVCE, Bengaluru",
-    photoUrl: "/images/charan-j.png",
-  },
-  {
-    id: 3,
-    name: "Manjunath HD",
-    academicDetails: "2nd Year ETE Student, Dr. AIT, Bengaluru",
-    photoUrl: "/images/manjunath-hd.png",
-  },
-  {
-    id: 4,
-    name: "Manya S",
-    academicDetails: "2nd Year ECE Student, VVCE, Mysore",
-    photoUrl: "/images/manya-s.png",
-  },
-  {
-    id: 5,
-    name: "Megharaj Banakar",
-    academicDetails: "2nd Year ECE Student, UVCE, Bengaluru",
-    photoUrl: "/images/megharaj-banakar.png",
-  },
-  {
-    id: 6,
-    name: "Poorvi TB",
-    academicDetails: "2nd Year CSE Student, Alva's Institute of Technology, Moodbidri",
-    photoUrl: "/images/poorvi-tb.jpg",
-  },
-  {
-    id: 7,
-    name: "S Y Ganesh",
-    academicDetails: "2nd Year ETE Student, Dr. AIT, Bengaluru",
-    photoUrl: "/images/sy-ganesh.png",
-  },
-  {
-    id: 8,
-    name: "Sanjay SB",
-    academicDetails: "2nd Year CS(AI) Student, RVITM, Bengaluru",
-    photoUrl: "/images/sanjay-sb.png",
-  },
-  {
-    id: 9,
-    name: "Sharad AI",
-    academicDetails: "3rd Year CSE Student, JNNCE, Shivamogga",
-    photoUrl: "/images/sharad-ai.jpg",
-  },
-  {
-    id: 10,
-    name: "Siri M",
-    academicDetails: "2nd Year ECE Student, BIT, Bengaluru",
-    photoUrl: "/images/siri-m.jpg",
-  },
+const founders = [
+  { id: "f1", name: "Mohammed Nadeem", role: "Founder", photoUrl: "/images/mohammed-nadeem.png" },
+  { id: "f2", name: "Pavan UG", role: "Founder", photoUrl: "/images/pavan-ug.png" },
 ];
 
+
+const coreTeam = [
+  { id: 0, name: "Mohith S", role: "Chief of Members", details: "2nd Year EEE, Dr. AIT, Bengaluru", photoUrl: "/images/mohith-s.jpg" },
+  { id: 1, name: "Anirudh Nag C V", details: "2nd Year CSE, Dr. AIT", photoUrl: "/images/anirudh-balaji.png" },
+  { id: 2, name: "Charan J", details: "2nd Year ECE, UVCE", photoUrl: "/images/charan-j.png" },
+  { id: 3, name: "Manjunath HD", details: "2nd Year ETE, Dr. AIT", photoUrl: "/images/manjunath-hd.png" },
+  { id: 4, name: "Manya S", details: "2nd Year ECE, VVCE", photoUrl: "/images/manya-s.png" },
+  { id: 5, name: "Megharaj Banakar", details: "2nd Year ECE, UVCE", photoUrl: "/images/megharaj-banakar.png" },
+  { id: 6, name: "Poorvi TB", details: "2nd Year CSE, Alva's IT", photoUrl: "/images/poorvi-tb.jpg" },
+  { id: 7, name: "S Y Ganesh", details: "2nd Year ETE, Dr. AIT", photoUrl: "/images/sy-ganesh.png" },
+  { id: 8, name: "Sanjay SB", details: "2nd Year CS(AI), RVITM", photoUrl: "/images/sanjay-sb.png" },
+  { id: 9, name: "Sharad AI", details: "3rd Year CSE, JNNCE", photoUrl: "/images/sharad-ai.jpg" },
+  { id: 10, name: "Shushanth S", details: "2nd Year CSE, KLE BVB Hubli", photoUrl: "/images/shushanth.png" },
+  { id: 11, name: "Siri M", details: "2nd Year ECE, BIT", photoUrl: "/images/siri-m.jpg" },
+];
+
+function Avatar({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-2 ring-primary/20 hover:ring-primary/50 transition-all duration-300 flex-shrink-0 bg-stone-100 dark:bg-stone-800">
+      <img src={src} alt={alt} className="w-full h-full object-cover object-top" />
+    </div>
+  );
+}
+
 export function Members() {
-  const { ref: headRef, inView: headVisible } = useInView();
+  const { ref, inView } = useInView();
 
   return (
-    <section
-      id="members"
-      className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-16"
-    >
+    <section id="members" className="mx-auto max-w-4xl px-5 py-12 sm:px-8 sm:py-16">
+
+      {/* Header */}
       <div
-        ref={headRef as React.RefObject<HTMLDivElement>}
-        className={`reveal ${headVisible ? "is-visible" : ""} flex flex-col items-center justify-center text-center mb-10 sm:mb-14`}
+        ref={ref as React.RefObject<HTMLDivElement>}
+        className={`reveal ${inView ? "is-visible" : ""} text-center mb-10`}
       >
-        <span className="text-sm font-semibold tracking-[0.3em] text-primary uppercase mb-3">
-          Our Team
-        </span>
-        <h2 className="text-3xl sm:text-4xl md:text-[2.85rem] font-playfair font-normal italic leading-[1.18] tracking-tight text-foreground">
-          Meet our <span className="font-sans not-italic font-bold">Mentors.</span>
+        <span className="text-xs font-bold tracking-[0.3em] text-primary uppercase">Our Team</span>
+        <h2 className="mt-2 text-3xl sm:text-4xl font-playfair italic font-normal text-foreground">
+          Meet our <span className="font-sans not-italic font-bold">Members.</span>
         </h2>
-        <p className="mt-4 max-w-2xl text-stone-600 dark:text-stone-300 text-sm sm:text-base md:text-lg">
-          The brilliant minds guiding the next generation of innovators.
-        </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 md:gap-8">
-        {members.map((member, idx) => (
-          <div
-            key={member.id}
-            className="group w-full bg-white dark:bg-stone-900 rounded-[16px] sm:rounded-[24px] border p-3 sm:p-6 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            style={{ animationDelay: `${idx * 100}ms` }}
-          >
-            <div className="w-20 h-20 sm:w-32 sm:h-32 mb-3 sm:mb-5 rounded-full overflow-hidden border-4 sm:border-[6px] border-primary/5 group-hover:border-primary/20 transition-colors">
-              <img
-                src={member.photoUrl}
-                alt={member.name}
-                className="w-full h-full object-cover"
-              />
+      {/* ── Founders ── */}
+      <div className="mb-8">
+        <p className="text-xs font-bold tracking-[0.25em] text-muted-foreground uppercase text-center mb-5">Founders</p>
+        <div className="flex justify-center gap-8 sm:gap-16">
+          {founders.map((f) => (
+            <div key={f.id} className="flex flex-col items-center gap-3 group">
+              <Avatar src={f.photoUrl} alt={f.name} />
+              <div className="text-center">
+                <p className="font-bold text-foreground text-sm sm:text-base">{f.name}</p>
+                <p className="text-xs font-semibold text-primary uppercase tracking-wider mt-0.5">{f.role}</p>
+              </div>
             </div>
-            <h3 className="text-base sm:text-xl font-bold tracking-tight text-foreground mb-1">
-              {member.name}
-            </h3>
-            <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400">
-              {member.academicDetails}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+
+      {/* Divider */}
+
+
+      {/* ── Core Team ── */}
+      <div>
+        <p className="text-xs font-bold tracking-[0.25em] text-muted-foreground uppercase text-center mb-6">Core Team</p>
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-x-4 gap-y-7">
+          {coreTeam.map((m) => (
+            <div key={m.id} className="flex flex-col items-center gap-2 group">
+              <Avatar src={m.photoUrl} alt={m.name} />
+              <div className="text-center">
+                <p className="font-semibold text-foreground text-xs leading-tight">{m.name}</p>
+                {m.role && (
+                  <p className="text-[0.6rem] font-bold text-primary uppercase tracking-wider mt-0.5 leading-tight">{m.role}</p>
+                )}
+                <p className="text-[0.65rem] text-stone-500 dark:text-stone-400 mt-0.5 leading-tight">{m.details}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
     </section>
   );
 }

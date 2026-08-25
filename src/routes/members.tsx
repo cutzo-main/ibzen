@@ -641,6 +641,8 @@ function SchoolIdeasPage() {
     return (
       <div className="site-canvas min-h-screen bg-background">
         <SiteNav />
+        {/* Spacer: 3px gold bar + 68px nav = 71px */}
+        <div style={{ height: "71px" }} aria-hidden />
         <main className="relative z-10">
           <section className="relative border-b border-border bg-background">
             <div className="relative mx-auto max-w-3xl px-5 pt-6 pb-6 sm:px-8 sm:pt-8 sm:pb-8">
@@ -717,6 +719,8 @@ function SchoolIdeasPageClient() {
     <>
       <div className="site-canvas min-h-screen bg-background">
         <SiteNav />
+        {/* Spacer: 3px gold bar + 68px nav = 71px */}
+        <div style={{ height: "71px" }} aria-hidden />
 
         <main className="relative z-10">
 

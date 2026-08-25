@@ -11,17 +11,20 @@
  * classes (e.g. --color-primary -> bg-primary, text-primary).
  *
  * The :root block defines the Ibzen brand palette:
- *   Warm Cream   background  #F4F1EC  oklch(0.96 0.012 80)
- *   Deep Navy    foreground  #0D1526  oklch(0.18 0.045 265)
- *   Warm Brown   primary     #C99457  oklch(0.67 0.12 65)
- *   Warm Stone   muted text  #7B7063  oklch(0.52 0.03 65)
- *   Parchment    border      #E2DDD6  oklch(0.90 0.015 80)
+ *   Pure White         background  #FFFFFF
+ *   Primary Brand Blue primary     #123B9A
+ *   Primary Dark Blue  navy/hover  #0B2D73
+ *   Accent Gold        accent      #F2A900
+ *   Off White          muted bg    #F7F9FC
+ *   Light Blue         cards/hl    #EAF1FF
+ *   Text Black         main text   #111111
+ *   Dark Grey          muted text  #4B5563
+ *   Border Grey        dividers    #E5E7EB
  *
  * Rules:
- *  - No neon colours anywhere
- *  - No gradient text / multi-colour headings
- *  - Warm Brown used ONLY for CTAs and links
- *  - All colours must use oklch format
+ *  - Blue + Gold + White identity
+ *  - No Purple, bright red, neon green, dark full-screen backgrounds everywhere
+ *  - Keep handwritten style consistently across the website
  */
 
 @theme inline {
@@ -72,63 +75,69 @@
 
   /* Brand navy — used as a standalone surface colour in the footer CTA */
   --color-navy: var(--navy);
+  --color-primary-hover: var(--primary-hover);
+  --color-gold: var(--gold);
+  --color-light-gold: var(--light-gold);
 }
 
 :root {
   --radius: 0.875rem;
 
   /* ── Core palette ────────────────────────────────────── */
-  --background:     oklch(0.96 0.012 80);       /* Warm Cream  #F4F1EC */
-  --foreground:     oklch(0.18 0.045 265);       /* Deep Navy   #0D1526 */
-  --navy:           oklch(0.18 0.045 265);       /* alias for footer dark surface */
-  --primary:        oklch(0.67 0.12 65);         /* Warm Brown  #C99457 */
-  --primary-foreground: oklch(1 0 0);            /* White */
+  --background:     #FFFFFF;                     /* Pure White */
+  --foreground:     #111111;                     /* Text Black */
+  --navy:           #0B2D73;                     /* Primary Dark Blue */
+  --primary:        #123B9A;                     /* Primary Brand Blue */
+  --primary-hover:  #0B2D73;                     /* Hover state for primary */
+  --primary-foreground: #FFFFFF;                 /* White */
+  --gold:           #F2A900;                     /* Accent Gold */
+  --light-gold:     #F8C45A;                     /* Light Gold */
 
   /* ── Surface / cards ────────────────────────────────── */
-  --card:           oklch(1 0 0);                /* Pure White */
-  --card-foreground: oklch(0.18 0.045 265);
+  --card:           #FFFFFF;                     /* Pure White */
+  --card-foreground: #0B2D73;                    /* Heading: #0B2D73 */
 
   /* ── Popovers ───────────────────────────────────────── */
-  --popover:        oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.045 265);
+  --popover:        #FFFFFF;
+  --popover-foreground: #0B2D73;
 
-  /* ── Secondary (light tint of primary) ──────────────── */
-  --secondary:      oklch(0.93 0.02 258);
-  --secondary-foreground: oklch(0.18 0.045 265);
+  /* ── Secondary ──────────────────────────────────────── */
+  --secondary:      #EAF1FF;                     /* Light Blue */
+  --secondary-foreground: #0B2D73;
 
   /* ── Muted ───────────────────────────────────────────── */
-  --muted:          oklch(0.93 0.012 80);        /* Slightly darker cream */
-  --muted-foreground: oklch(0.52 0.03 65);       /* Warm Stone  #7B7063 */
+  --muted:          #F7F9FC;                     /* Off White */
+  --muted-foreground: #4B5563;                   /* Dark Grey */
 
-  /* ── Accent = same as primary for consistency ─────────  */
-  --accent:         oklch(0.93 0.02 258);
-  --accent-foreground: oklch(0.18 0.045 265);
+  /* ── Accent ─────────────────────────────────────────── */
+  --accent:         #F2A900;                     /* Accent Gold */
+  --accent-foreground: #FFFFFF;
 
   /* ── Destructive ─────────────────────────────────────── */
   --destructive:    oklch(0.58 0.22 27);
   --destructive-foreground: oklch(1 0 0);
 
   /* ── Borders & inputs ───────────────────────────────── */
-  --border:         oklch(0.90 0.015 80);        /* Parchment   #E2DDD6 */
-  --input:          oklch(0.90 0.015 80);
-  --ring:           oklch(0.67 0.12 65);         /* Warm Brown  focus ring */
+  --border:         #E5E7EB;                     /* Border Grey */
+  --input:          #E5E7EB;
+  --ring:           #F2A900;                     /* Accent Gold */
 
   /* ── Charts ─────────────────────────────────────────── */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-1: #123B9A;
+  --chart-2: #F2A900;
+  --chart-3: #0B2D73;
+  --chart-4: #F8C45A;
+  --chart-5: #EAF1FF;
 
   /* ── Sidebar ─────────────────────────────────────────── */
-  --sidebar:                 oklch(0.96 0.012 80);
-  --sidebar-foreground:      oklch(0.18 0.045 265);
-  --sidebar-primary:         oklch(0.67 0.12 65);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent:          oklch(0.93 0.012 80);
-  --sidebar-accent-foreground: oklch(0.18 0.045 265);
-  --sidebar-border:          oklch(0.90 0.015 80);
-  --sidebar-ring:            oklch(0.67 0.12 65);
+  --sidebar:                 #FFFFFF;
+  --sidebar-foreground:      #0B2D73;
+  --sidebar-primary:         #123B9A;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent:          #F7F9FC;
+  --sidebar-accent-foreground: #0B2D73;
+  --sidebar-border:          #E5E7EB;
+  --sidebar-ring:            #F2A900;
 }
 
 /* Dark block kept inert — the app never applies .dark */
@@ -181,6 +190,11 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: clip;
   }
 
   .font-syne {
@@ -397,6 +411,475 @@ header {
 .nav-scrolled {
   border-bottom-color: color-mix(in oklab, var(--color-primary) 18%, var(--color-border));
   box-shadow: 0 1px 24px color-mix(in oklab, var(--color-primary) 6%, transparent);
+}
+
+/* =====================================================
+   IBZEN NAVBAR SYSTEM
+   Logo-left | Links-center | CTA-right
+   Sticky, frosted, brand-precise.
+   ===================================================== */
+
+/* ── Gold accent top strip ─────────────────────────── */
+.ibzen-nav-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-gold) 50%,
+    var(--color-primary) 100%
+  );
+  z-index: 51;
+  animation: slide-down 0.4s ease both;
+}
+
+/* ── Header shell ──────────────────────────────────── */
+.ibzen-nav {
+  position: fixed;
+  top: 3px;          /* sits just below the gold top bar */
+  left: 0;
+  right: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+  animation: slide-down 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.ibzen-nav--scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom-color: color-mix(in oklab, var(--color-primary) 14%, var(--color-border));
+  box-shadow:
+    0 1px 0 color-mix(in oklab, var(--color-gold) 20%, transparent),
+    0 4px 24px color-mix(in oklab, var(--color-navy) 8%, transparent);
+}
+
+/* ── Inner 3-col grid ──────────────────────────────── */
+.ibzen-nav-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 68px;
+  gap: 1.5rem;
+}
+
+/* ── Logo ──────────────────────────────────────────── */
+.ibzen-nav-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.2s ease;
+}
+
+.ibzen-nav-logo:hover {
+  opacity: 0.85;
+}
+
+.ibzen-nav-logo-img {
+  height: 124px;
+  width: auto;
+  margin-top: -30px;
+  margin-bottom: -30px;
+  margin-left: -8px;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  display: block;
+}
+
+.ibzen-nav-logo:hover .ibzen-nav-logo-img {
+  transform: scale(1.04);
+}
+
+/* ── Desktop links (centred column) ────────────────── */
+.ibzen-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+/* Individual link */
+.ibzen-nav-link {
+  position: relative;
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  text-decoration: none;
+  border-radius: 6px;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Animated underline */
+.ibzen-nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 1.5px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 9999px;
+}
+
+.ibzen-nav-link:hover {
+  color: var(--color-primary);
+  background-color: color-mix(in oklab, var(--color-primary) 5%, transparent);
+}
+
+.ibzen-nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ── Actions (CTA + hamburger) ─────────────────────── */
+.ibzen-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* ── CTA button ────────────────────────────────────── */
+.ibzen-nav-cta {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem;
+  background-color: var(--color-navy);
+  color: #ffffff;
+  border: 1.5px solid var(--color-navy);
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.ibzen-nav-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(242, 169, 0, 0.25) 50%,
+    transparent 65%
+  );
+  transform: translateX(-130%) skewX(-12deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.ibzen-nav-cta:hover {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-navy);
+  box-shadow: 0 4px 20px color-mix(in oklab, var(--color-gold) 35%, transparent);
+  transform: translateY(-1px);
+}
+
+.ibzen-nav-cta:hover::before {
+  animation: shimmer 0.55s ease forwards;
+}
+
+.ibzen-nav-cta:active {
+  transform: translateY(0);
+}
+
+.ibzen-nav-cta-arrow {
+  transition: transform 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.ibzen-nav-cta:hover .ibzen-nav-cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ── Bottom rule ───────────────────────────────────── */
+.ibzen-nav-rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in oklab, var(--color-primary) 15%, var(--color-border)),
+    transparent
+  );
+  margin: 0 2rem;
+}
+
+/* ── Hamburger ─────────────────────────────────────── */
+.ibzen-nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ibzen-nav-burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-navy);
+  border-radius: 9999px;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.ibzen-nav-burger:hover span {
+  background: var(--color-gold);
+}
+
+/* Open state — X morph */
+.ibzen-nav-burger--open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.ibzen-nav-burger--open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.ibzen-nav-burger--open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ── Mobile drawer ─────────────────────────────────── */
+.ibzen-mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 48;
+  background: rgba(11, 45, 115, 0.35);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.ibzen-mobile-overlay--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ibzen-mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 49;
+  width: min(320px, 85vw);
+  background: #ffffff;
+  border-left: 1px solid var(--color-border);
+  box-shadow: -8px 0 40px rgba(11, 45, 115, 0.12);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+.ibzen-mobile-drawer--open {
+  transform: translateX(0);
+}
+
+/* Gold top strip on drawer */
+.ibzen-mobile-drawer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-gold));
+}
+
+.ibzen-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  margin-top: 3px;
+}
+
+.ibzen-mobile-logo {
+  height: 80px;
+  width: auto;
+  margin-top: -16px;
+  margin-bottom: -16px;
+  margin-left: -8px;
+}
+
+.ibzen-mobile-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: none;
+  color: var(--color-navy);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.ibzen-mobile-close:hover {
+  border-color: var(--color-gold);
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+}
+
+.ibzen-mobile-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.ibzen-mobile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1.5rem;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  border-bottom: 1px solid color-mix(in oklab, var(--color-border) 60%, transparent);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+.ibzen-mobile-link:hover {
+  background-color: color-mix(in oklab, var(--color-primary) 4%, transparent);
+  color: var(--color-primary);
+  padding-left: 1.85rem;
+}
+
+.ibzen-mobile-link-num {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--color-gold);
+  min-width: 1.5rem;
+}
+
+.ibzen-mobile-link-ext {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: var(--color-muted-foreground);
+}
+
+.ibzen-mobile-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.ibzen-mobile-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.85rem 1.5rem;
+  background-color: var(--color-navy);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.ibzen-mobile-cta:hover {
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px color-mix(in oklab, var(--color-gold) 30%, transparent);
+}
+
+/* ── Responsive: hide/show ─────────────────────────── */
+@media (max-width: 768px) {
+  .ibzen-nav-links {
+    display: none;
+  }
+
+  .ibzen-nav-cta {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.05em;
+  }
+
+  .ibzen-nav-burger {
+    display: flex;
+  }
+
+  .ibzen-nav-inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    height: 60px;
+  }
+
+  .ibzen-nav-logo-img {
+    height: 70px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    margin-left: -4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ibzen-nav-inner {
+    padding: 0 1rem;
+  }
 }
 
 /* =====================================================
@@ -872,3 +1355,89 @@ header {
   animation: spin-slow 8s linear infinite;
 }
 
+
+/* ─────────────────────────────────────────────────────────
+   MARQUEE TICKER
+   ───────────────────────────────────────────────────────── */
+
+.ticker-root {
+  position: relative;
+  overflow: hidden;
+  background: #0d1b2e;
+  border-top: 1px solid rgba(242, 169, 0, 0.15);
+  border-bottom: 1px solid rgba(242, 169, 0, 0.15);
+  height: 38px;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.ticker-viewport {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: ticker-scroll 38s linear infinite;
+  will-change: transform;
+}
+
+.ticker-track--paused {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c8d6e8;
+  flex-shrink: 0;
+  padding: 0 2px;
+  transition: color 0.25s ease;
+}
+
+.ticker-item:hover {
+  color: #F2A900;
+}
+
+.ticker-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #F2A900;
+  opacity: 0.75;
+  flex-shrink: 0;
+  margin: 0 16px;
+  vertical-align: middle;
+}
+
+.ticker-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  pointer-events: none;
+  z-index: 2;
+}
+.ticker-fade-left {
+  left: 0;
+  background: linear-gradient(to right, #0d1b2e 0%, transparent 100%);
+}
+.ticker-fade-right {
+  right: 0;
+  background: linear-gradient(to left, #0d1b2e 0%, transparent 100%);
+}

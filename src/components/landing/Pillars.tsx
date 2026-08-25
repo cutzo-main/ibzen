@@ -39,11 +39,11 @@ function StudyDeckCard({
   pillar: (typeof pillars)[0];
 }) {
   return (
-    <div className="w-full bg-white dark:bg-stone-900 rounded-[28px] sm:rounded-[32px] border p-7 sm:p-9 md:p-11 relative overflow-hidden blue-fog-outline">
+    <div className="w-full bg-card rounded-[28px] sm:rounded-[32px] border p-7 sm:p-9 md:p-11 relative overflow-hidden blue-fog-outline">
       {/* Ghost index watermark */}
       <span
         aria-hidden
-        className="pointer-events-none absolute right-6 sm:right-10 top-2 sm:top-4 select-none text-7xl sm:text-8xl md:text-[10rem] font-black text-[#EDE9E1]/80 dark:text-stone-800/40 leading-none tracking-tighter"
+        className="pointer-events-none absolute right-6 sm:right-10 top-2 sm:top-4 select-none text-7xl sm:text-8xl md:text-[10rem] font-black text-muted/60 leading-none tracking-tighter"
       >
         {pillar.index}
       </span>
@@ -51,18 +51,18 @@ function StudyDeckCard({
       <div>
         {/* Top row: Index label */}
         <div className="flex items-center justify-between relative z-10 mb-4 sm:mb-6">
-          <span className="text-xs sm:text-sm font-semibold tracking-[0.3em] text-stone-400 dark:text-stone-500 uppercase">
+          <span className="text-xs sm:text-sm font-semibold tracking-[0.3em] text-muted-foreground uppercase">
             {pillar.indexFormatted}
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="relative z-10 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+        <h3 className="relative z-10 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-navy">
           {pillar.title}
         </h3>
 
         {/* Copy */}
-        <p className="relative z-10 mt-3 sm:mt-4 max-w-2xl text-stone-600 dark:text-stone-300 text-sm sm:text-base md:text-lg leading-relaxed font-normal">
+        <p className="relative z-10 mt-3 sm:mt-4 max-w-2xl text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed font-normal">
           {pillar.copy}
         </p>
       </div>
@@ -95,7 +95,7 @@ export function Pillars() {
         className={`reveal ${headVisible ? "is-visible" : ""} flex flex-col items-center justify-center text-center mb-10 sm:mb-14`}
       >
         <div className="max-w-2xl">
-          <h2 className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-[2.85rem] font-playfair font-normal italic leading-[1.18] tracking-tight text-foreground">
+          <h2 className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-[2.85rem] font-playfair font-normal italic leading-[1.18] tracking-tight text-navy">
             <span className="font-sans not-italic font-bold text-[0.92em]">4</span> Pillars of Ibzen.
           </h2>
         </div>
@@ -112,7 +112,7 @@ export function Pillars() {
           <button
             onClick={prevDeckCard}
             type="button"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-xs font-semibold text-foreground shadow-sm hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-card border border-border text-xs font-semibold text-navy shadow-sm hover:bg-muted transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Previous</span>
@@ -128,7 +128,7 @@ export function Pillars() {
                 aria-label={`Go to pillar ${p.index}`}
                 className={`h-2.5 rounded-full transition-all duration-300 ${activeDeckIndex === idx
                     ? "w-8 bg-primary"
-                    : "w-2.5 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400"
+                    : "w-2.5 bg-border hover:bg-muted-foreground"
                   }`}
               />
             ))}
@@ -137,7 +137,7 @@ export function Pillars() {
           <button
             onClick={nextDeckCard}
             type="button"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-xs font-semibold text-foreground shadow-sm hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-card border border-border text-xs font-semibold text-navy shadow-sm hover:bg-muted transition-colors"
           >
             <span>Next</span>
             <ChevronRight className="w-4 h-4" />

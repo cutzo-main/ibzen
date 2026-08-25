@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "@/hooks/useInView";
 import { ExternalLink } from "lucide-react";
@@ -36,310 +36,302 @@ const steps = [
     id: "01",
     phase: "Step 01",
     title: "Classroom Outreach",
-    desc: "Our student-led team visits school classrooms to introduce the program, spark curiosity, and challenge students to identify real problems.",
-    align: "left",
-    top: "4%",
+    desc: "Our student-led team visits school classrooms to introduce the programme, spark curiosity, and challenge students to spot real-world problems worth solving.",
+    align: "left" as const,
     tag: "Outreach",
   },
   {
     id: "02",
     phase: "Step 02",
-    title: "Submission & Teams",
-    desc: "Students submit ideas. We select top concepts, form balanced 4-member squads, and assign an engineering mentor.",
-    align: "right",
-    top: "31%",
+    title: "Idea Submission",
+    desc: "Every interested student submits their own idea before the event. Our mentors review all entries and shortlist the strongest concepts to move forward into the sprint.",
+    align: "right" as const,
     tag: "Selection",
   },
   {
     id: "03",
     phase: "Step 03",
-    title: "The 2-Day Ideathon",
-    desc: "Teams dissect their idea, assess feasibility, and construct a business model on Day 1. On Day 2, they pitch to judges.",
-    align: "left",
-    top: "60%",
-    tag: "Building & Pitch",
+    title: "Teams & Mentors Assigned",
+    desc: "Selected ideas become the foundation of each squad (2–4 students). Every team — whether your idea was picked or not — is paired with one dedicated engineering mentor for the full 48 hours.",
+    align: "left" as const,
+    tag: "Formation",
   },
   {
     id: "04",
     phase: "Step 04",
+    title: "The 2-Day Sprint & Pitch",
+    desc: "Teams spend 48 hours developing a complete business model. No prototypes — pure thinking, research, and strategy. On Day 2, they present to a panel of judges.",
+    align: "right" as const,
+    tag: "Building & Pitch",
+  },
+  {
+    id: "05",
+    phase: "Step 05",
     title: "Prizes & Progression",
-    desc: "Winning teams gain direct access to InnoveX Hub - our premier engineering lab - taking steps into real-world building.",
-    align: "right",
-    top: "87%",
+    desc: "Winning teams gain direct access to InnoveX Hub — our premier engineering lab — where they take their first real steps into building what they envisioned.",
+    align: "left" as const,
     tag: "Incubation",
   },
 ];
 
+/** Measures an element's height and keeps it updated via ResizeObserver */
+function useElementHeight(ref: React.RefObject<HTMLElement | null>) {
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const update = () => setHeight(el.offsetHeight);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [ref]);
+  return height;
+}
+
+
 export function Journey() {
   const { ref: headRef, inView: headVisible } = useInView();
   const { ref: sectionRef, inView: sectionVisible } = useInView(0.05);
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
+  // Desktop
+  const desktopRef = useRef<HTMLDivElement>(null);
+  const desktopH = useElementHeight(desktopRef as React.RefObject<HTMLElement>);
+
+  const { scrollYProgress: desktopScroll } = useScroll({
+    target: desktopRef,
     offset: ["start 60%", "end 80%"],
   });
+  const desktopClipH = useTransform(desktopScroll, [0, 1], [0, desktopH]);
 
-  const clipPath = useTransform(scrollYProgress, [0, 1], ["inset(0% 0% 100% 0%)", "inset(0% 0% 0% 0%)"]);
+  // Mobile
+  const mobileRef = useRef<HTMLDivElement>(null);
+  const mobileH = useElementHeight(mobileRef as React.RefObject<HTMLElement>);
+
+  const { scrollYProgress: mobileScroll } = useScroll({
+    target: mobileRef,
+    offset: ["start 65%", "end 85%"],
+  });
+  const mobileClipH = useTransform(mobileScroll, [0, 1], [0, mobileH]);
 
   return (
-    <section 
-      id="journey" 
-      ref={sectionRef as React.RefObject<HTMLElement>} 
+    <section
+      id="journey"
+      ref={sectionRef as React.RefObject<HTMLElement>}
       className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16 relative overflow-hidden"
     >
-      <div ref={containerRef} className="w-full h-full relative">
+      {/* Section Header */}
       <div
         ref={headRef as React.RefObject<HTMLDivElement>}
-        className={`max-w-2xl mb-12 sm:mb-16 mx-auto text-center reveal ${headVisible ? "is-visible" : ""}`}
+        className={`max-w-2xl mb-16 sm:mb-20 mx-auto text-center reveal ${headVisible ? "is-visible" : ""}`}
       >
-        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.45em] text-stone-500 dark:text-stone-400">
+        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.45em] text-muted-foreground">
           FROM CLASSROOM THOUGHT TO STAGE PITCH
         </p>
-        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-playfair font-normal italic leading-tight tracking-tight text-foreground">
+        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-playfair font-normal italic leading-tight tracking-tight text-navy">
           The <span className="not-italic inline-block">J</span>ourney
         </h2>
       </div>
 
-      {/* DESKTOP CURVED ROPE LAYOUT */}
-      <div 
-        className="relative hidden md:block w-full h-[1450px] lg:h-[1650px] max-w-5xl mx-auto mt-10"
+      {/* ── DESKTOP LAYOUT (md+) ── */}
+      <div
+        ref={desktopRef}
+        className="relative hidden md:block max-w-5xl mx-auto"
       >
-        {/* SVG Winding Curved Braided Rope */}
-        <motion.svg
-          style={{ clipPath }}
-          className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-1000 ${
-            sectionVisible ? "opacity-100" : "opacity-0"
-          }`}
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="rope-grad-desktop" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#ECCA99" />
-              <stop offset="35%" stopColor="#C99457" />
-              <stop offset="70%" stopColor="#AA753C" />
-              <stop offset="100%" stopColor="#875628" />
-            </linearGradient>
-          </defs>
+        {/* Faint spine behind the road */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-border/30 pointer-events-none" />
 
-          {/* Base shadow stroke */}
-          <path
-            d="M 25 0 C 25 18, 75 18, 75 32 C 75 46, 25 46, 25 64 C 25 82, 75 82, 75 100"
-            fill="none"
-            stroke="#563518"
-            strokeWidth="24"
-            vectorEffect="non-scaling-stroke"
-            strokeLinecap="round"
-            opacity="0.2"
-            style={{ transform: "translate(2px, 6px)" }}
-          />
-
-          {/* Main Braided Rope Outer Border */}
-          <path
-            d="M 25 0 C 25 18, 75 18, 75 32 C 75 46, 25 46, 25 64 C 25 82, 75 82, 75 100"
-            fill="none"
-            stroke="#6F451F"
-            strokeWidth="20"
-            vectorEffect="non-scaling-stroke"
-            strokeLinecap="round"
-          />
-
-          {/* Main Rope Body */}
-          <path
-            d="M 25 0 C 25 18, 75 18, 75 32 C 75 46, 25 46, 25 64 C 25 82, 75 82, 75 100"
-            fill="none"
-            stroke="url(#rope-grad-desktop)"
-            strokeWidth="15"
-            vectorEffect="non-scaling-stroke"
-            strokeLinecap="round"
-          />
-
-          {/* Rope Fiber Twists (Golden Strands) */}
-          <path
-            d="M 25 0 C 25 18, 75 18, 75 32 C 75 46, 25 46, 25 64 C 25 82, 75 82, 75 100"
-            fill="none"
-            stroke="#FBF3DB"
-            strokeWidth="7"
-            strokeDasharray="6 14"
-            vectorEffect="non-scaling-stroke"
-            strokeLinecap="round"
-            opacity="0.8"
-          />
-
-          {/* Secondary Counter Fiber Twist */}
-          <path
-            d="M 25 0 C 25 18, 75 18, 75 32 C 75 46, 25 46, 25 64 C 25 82, 75 82, 75 100"
-            fill="none"
-            stroke="#7C4B1E"
-            strokeWidth="4"
-            strokeDasharray="3 17"
-            strokeDashoffset="8"
-            vectorEffect="non-scaling-stroke"
-            strokeLinecap="round"
-            opacity="0.7"
-          />
-        </motion.svg>
-
-        {/* 4 Cards Positioned on desktop curve */}
-        {steps.map((step, idx) => (
-          <motion.div 
-            key={step.id}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-            className="absolute w-[44%] max-w-[440px] -translate-x-1/2 -translate-y-1/2 z-10"
-            style={{ 
-              top: step.top, 
-              left: step.align === "left" ? "25%" : "75%"
-            }}
+        {/* Road — full natural height, revealed by animated clipPath */}
+        {desktopH > 0 && (
+          <div
+            className="absolute left-1/2 top-0 pointer-events-none"
+            style={{ transform: "translateX(-50%)", width: 26, height: desktopH }}
           >
-            <TiltMini>
-              <div className="bg-white dark:bg-stone-900 rounded-[28px] border p-7 sm:p-8 relative text-left flex flex-col justify-between group blue-fog-outline">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-[#F5F2ED] dark:bg-stone-800 text-stone-600 dark:text-stone-300">
-                      {step.phase}
-                    </span>
-                    <span className="text-xs font-semibold text-primary/80">
-                      {step.tag}
-                    </span>
-                  </div>
-                  <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-3 tracking-tight">
-                    {step.title}
-                  </h4>
-                  <p className="text-sm sm:text-base text-stone-600 dark:text-stone-300 leading-relaxed">
-                    {step.desc}
-                  </p>
+            {/* Override the static clipPath rect height with a motion value */}
+            <svg
+              width={26}
+              height={desktopH}
+              style={{ display: "block", overflow: "visible", position: "absolute", inset: 0 }}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <pattern id="d-dashes" x={0} y={0} width={26} height={32} patternUnits="userSpaceOnUse">
+                  <rect x={11} y={4} width={4} height={16} rx={2} fill="white" />
+                </pattern>
+                <clipPath id="d-road-clip">
+                  <motion.rect x={0} y={0} width={26} height={desktopClipH} />
+                </clipPath>
+              </defs>
+
+              <g clipPath="url(#d-road-clip)">
+                {/* Outer border (dark gold) */}
+                <rect x={0} y={0} width={26} height={desktopH} fill="#c28500" />
+                {/* Inner track (main gold) */}
+                <rect x={3} y={0} width={20} height={desktopH} fill="#f2a900" />
+                {/* Center dashes */}
+                <rect x={0} y={0} width={26} height={desktopH} fill="url(#d-dashes)" />
+              </g>
+            </svg>
+          </div>
+        )}
+
+        {/* Step cards */}
+        <div className="flex flex-col gap-16 py-4">
+          {steps.map((step, idx) => {
+            const isLeft = step.align === "left";
+            return (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.65, delay: 0.05, ease: "easeOut" }}
+                className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-0"
+              >
+                {/* Left side — card or spacer */}
+                <div className={isLeft ? "pr-10" : ""}>
+                  {isLeft && (
+                    <TiltMini>
+                      <div className="bg-card rounded-[28px] border border-border p-7 sm:p-8 text-left flex flex-col gap-3 blue-fog-outline">
+                        <div className="flex items-center justify-between">
+                          <span className="px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-muted text-muted-foreground">
+                            {step.phase}
+                          </span>
+                          <span className="text-xs font-semibold text-gold">{step.tag}</span>
+                        </div>
+                        <h4 className="text-xl sm:text-2xl font-bold text-navy tracking-tight">{step.title}</h4>
+                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{step.desc}</p>
+                        {step.id === "05" && (
+                          <a
+                            href="https://innovexhub.in"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                          >
+                            <span>Enter InnoveX Hub</span>
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        )}
+                      </div>
+                    </TiltMini>
+                  )}
                 </div>
 
-                {step.id === "04" && (
-                  <a
-                    href="https://innovexhub.in"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
-                  >
-                    <span>Enter InnoveX Hub</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                )}
-              </div>
-            </TiltMini>
+                {/* Centre node on the spine */}
+                <div className="flex flex-col items-center relative z-10 shrink-0">
+                  {isLeft && (
+                    <div className="absolute right-full top-1/2 -translate-y-1/2 h-[3px] w-10 bg-gold rounded-l-full" />
+                  )}
+                  <div className="w-10 h-10 rounded-full bg-gold border-2 border-amber-300 shadow-[0_0_14px_rgba(242,169,0,0.5)] flex items-center justify-center shrink-0">
+                    <span className="text-[0.65rem] font-bold text-white leading-none">{step.id}</span>
+                  </div>
+                  {!isLeft && (
+                    <div className="absolute left-full top-1/2 -translate-y-1/2 h-[3px] w-10 bg-gold rounded-r-full" />
+                  )}
+                </div>
 
-            {/* Hand-crafted Rope Node Wooden Ring Peg Anchor */}
-            <div 
-              className="absolute left-1/2 top-full w-8 h-20 -translate-x-1/2 z-[-1] flex flex-col items-center"
-            >
-              {/* Vertical connecting cord */}
-              <div className="w-2.5 h-full bg-gradient-to-b from-[#C99457] via-[#A8743A] to-[#6F451F] shadow-sm rounded-full" />
-              
-              {/* Wooden ring knot */}
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#E6BE90] via-[#B88348] to-[#6E421B] shadow-md border-2 border-amber-200/40 flex items-center justify-center -mt-2">
-                <div className="w-3.5 h-3.5 rounded-full bg-[#4A2D13] shadow-inner" />
-              </div>
-            </div>
-          </motion.div>
-        ))}
+                {/* Right side — card or spacer */}
+                <div className={!isLeft ? "pl-10" : ""}>
+                  {!isLeft && (
+                    <TiltMini>
+                      <div className="bg-card rounded-[28px] border border-border p-7 sm:p-8 text-left flex flex-col gap-3 blue-fog-outline">
+                        <div className="flex items-center justify-between">
+                          <span className="px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-muted text-muted-foreground">
+                            {step.phase}
+                          </span>
+                          <span className="text-xs font-semibold text-gold">{step.tag}</span>
+                        </div>
+                        <h4 className="text-xl sm:text-2xl font-bold text-navy tracking-tight">{step.title}</h4>
+                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{step.desc}</p>
+                        {step.id === "05" && (
+                          <a
+                            href="https://innovexhub.in"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-1 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                          >
+                            <span>Enter InnoveX Hub</span>
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        )}
+                      </div>
+                    </TiltMini>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* MOBILE & TABLET ELEGANT CURVED ROPE LAYOUT */}
-      <div 
-        className="relative block md:hidden w-full mt-8 pl-12 sm:pl-16"
+      {/* ── MOBILE LAYOUT (< md) ── */}
+      <div
+        ref={mobileRef}
+        className="relative block md:hidden w-full mt-4 pl-12 sm:pl-16"
       >
-        {/* Curved Organic Rope SVG Running Down Left Side */}
-        <div className="absolute left-2 sm:left-4 top-0 bottom-0 w-10 sm:w-12 pointer-events-none z-0">
-          <motion.svg style={{ clipPath }} className="w-full h-full" viewBox="0 0 40 800" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="rope-grad-mobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#EBCB9B" />
-                <stop offset="50%" stopColor="#C89356" />
-                <stop offset="100%" stopColor="#855325" />
-              </linearGradient>
-            </defs>
+        {/* Road — full natural height, clipPath reveals it */}
+        {mobileH > 0 && (
+          <div
+            className="absolute left-2 sm:left-3 top-0 pointer-events-none"
+            style={{ width: 16, height: mobileH }}
+          >
+            <svg
+              width={16}
+              height={mobileH}
+              style={{ display: "block", overflow: "visible", position: "absolute", inset: 0 }}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <pattern id="m-dashes" x={0} y={0} width={16} height={24} patternUnits="userSpaceOnUse">
+                  <rect x={6} y={4} width={4} height={12} rx={2} fill="white" />
+                </pattern>
+                <clipPath id="m-road-clip">
+                  <motion.rect x={0} y={0} width={16} height={mobileClipH} />
+                </clipPath>
+              </defs>
 
-            {/* Organic Curving Path down mobile timeline */}
-            {/* Dark Outline */}
-            <path
-              d="M 20 0 C 35 100, 5 200, 20 300 C 35 400, 5 500, 20 600 C 35 700, 15 780, 20 800"
-              fill="none"
-              stroke="#5C3717"
-              strokeWidth="16"
-              strokeLinecap="round"
-            />
-            {/* Main Rope Body */}
-            <path
-              d="M 20 0 C 35 100, 5 200, 20 300 C 35 400, 5 500, 20 600 C 35 700, 15 780, 20 800"
-              fill="none"
-              stroke="url(#rope-grad-mobile)"
-              strokeWidth="12"
-              strokeLinecap="round"
-            />
-            {/* Twist Fiber Details */}
-            <path
-              d="M 20 0 C 35 100, 5 200, 20 300 C 35 400, 5 500, 20 600 C 35 700, 15 780, 20 800"
-              fill="none"
-              stroke="#FFF8E7"
-              strokeWidth="5"
-              strokeDasharray="5 11"
-              strokeLinecap="round"
-              opacity="0.85"
-            />
-            <path
-              d="M 20 0 C 35 100, 5 200, 20 300 C 35 400, 5 500, 20 600 C 35 700, 15 780, 20 800"
-              fill="none"
-              stroke="#683F19"
-              strokeWidth="3"
-              strokeDasharray="3 13"
-              strokeDashoffset="6"
-              strokeLinecap="round"
-              opacity="0.6"
-            />
-          </motion.svg>
-        </div>
+              <g clipPath="url(#m-road-clip)">
+                {/* Outer border (dark gold) */}
+                <rect x={0} y={0} width={16} height={mobileH} fill="#c28500" />
+                {/* Inner track (main gold) */}
+                <rect x={2} y={0} width={12} height={mobileH} fill="#f2a900" />
+                {/* Center dashes */}
+                <rect x={0} y={0} width={16} height={mobileH} fill="url(#m-dashes)" />
+              </g>
+            </svg>
+          </div>
+        )}
 
-        {/* Vertical Step Cards */}
+        {/* Step cards */}
         <div className="flex flex-col space-y-10 sm:space-y-12 py-4">
-          {steps.map((step, idx) => (
-            <motion.div 
+          {steps.map((step) => (
+            <motion.div
               key={step.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="relative z-10"
             >
-              {/* Hand-tied Rope Knot & Connecting Wooden Arm */}
-              <div className="absolute top-8 -left-10 sm:-left-12 flex items-center z-10">
-                {/* Wooden Rope Ring Knot */}
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-[#E6BE90] via-[#C58E50] to-[#784A1F] border-2 border-amber-200/50 shadow-md flex items-center justify-center shrink-0">
-                  <span className="text-[0.65rem] font-bold text-white leading-none">
-                    {step.id}
-                  </span>
+              {/* Gold node + horizontal connector */}
+              <div className="absolute top-7 -left-10 sm:-left-12 flex items-center z-10">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gold border-2 border-amber-300 shadow-[0_0_10px_rgba(242,169,0,0.45)] flex items-center justify-center shrink-0">
+                  <span className="text-[0.6rem] font-bold text-white leading-none">{step.id}</span>
                 </div>
-                {/* Horizontal rope connector cord into card */}
-                <div className="h-1 sm:h-1.5 w-5 sm:w-6 bg-gradient-to-r from-[#C58E50] to-[#E7D6C1] shadow-sm rounded-r-full" />
+                <div className="h-[3px] w-5 sm:w-6 bg-gold rounded-r-full" />
               </div>
 
-              {/* Step Card */}
-              <div className="bg-white dark:bg-stone-900 rounded-[24px] sm:rounded-[28px] border p-6 sm:p-7 relative blue-fog-outline">
+              {/* Card */}
+              <div className="bg-card rounded-[24px] sm:rounded-[28px] border border-border p-6 sm:p-7 blue-fog-outline">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="px-3 py-0.5 rounded-full text-[0.7rem] font-bold tracking-wider uppercase bg-[#F5F2ED] dark:bg-stone-800 text-stone-600 dark:text-stone-300">
+                  <span className="px-3 py-0.5 rounded-full text-[0.7rem] font-bold tracking-wider uppercase bg-muted text-muted-foreground">
                     {step.phase}
                   </span>
-                  <span className="text-[0.7rem] font-medium text-stone-400">
-                    {step.tag}
-                  </span>
+                  <span className="text-[0.7rem] font-medium text-gold">{step.tag}</span>
                 </div>
-                <h4 className="text-xl font-bold text-foreground mb-2 tracking-tight">
-                  {step.title}
-                </h4>
-                <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed font-normal">
-                  {step.desc}
-                </p>
-
-                {step.id === "04" && (
+                <h4 className="text-xl font-bold text-navy mb-2 tracking-tight">{step.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed font-normal">{step.desc}</p>
+                {step.id === "05" && (
                   <a
                     href="https://innovexhub.in"
                     target="_blank"
@@ -354,7 +346,6 @@ export function Journey() {
             </motion.div>
           ))}
         </div>
-      </div>
       </div>
     </section>
   );
