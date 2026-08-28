@@ -57,10 +57,16 @@ function Index() {
         <MarqueeTicker />
         <main className="relative z-10">
           <Hero />
+          {/* Separator */}
+          <hr className="section-sep mx-auto max-w-6xl" />
           <OurBelief />
           <Journey />
+          {/* Separator */}
+          <hr className="section-sep mx-auto max-w-6xl" />
           <RecentEvents />
           <Members />
+          {/* Separator */}
+          <hr className="section-sep mx-auto max-w-6xl" />
           <Testimonials />
         </main>
         <SiteFooter />

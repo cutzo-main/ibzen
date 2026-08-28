@@ -8,18 +8,23 @@ const founders = [
 
 
 const coreTeam = [
-  { id: 0, name: "Mohith S", role: "Chief of Members", details: "2nd Year EEE, Dr. AIT, Bengaluru", photoUrl: "/images/mohith-s.jpg" },
-  { id: 1, name: "Anirudh Nag C V", details: "2nd Year CSE, Dr. AIT", photoUrl: "/images/anirudh-balaji.png" },
-  { id: 2, name: "Charan J", details: "2nd Year ECE, UVCE", photoUrl: "/images/charan-j.png" },
-  { id: 3, name: "Manjunath HD", details: "2nd Year ETE, Dr. AIT", photoUrl: "/images/manjunath-hd.png" },
-  { id: 4, name: "Manya S", details: "2nd Year ECE, VVCE", photoUrl: "/images/manya-s.png" },
-  { id: 5, name: "Megharaj Banakar", details: "2nd Year ECE, UVCE", photoUrl: "/images/megharaj-banakar.png" },
-  { id: 6, name: "Poorvi TB", details: "2nd Year CSE, Alva's IT", photoUrl: "/images/poorvi-tb.jpg" },
-  { id: 7, name: "S Y Ganesh", details: "2nd Year ETE, Dr. AIT", photoUrl: "/images/sy-ganesh.png" },
-  { id: 8, name: "Sanjay SB", details: "2nd Year CS(AI), RVITM", photoUrl: "/images/sanjay-sb.png" },
-  { id: 9, name: "Sharad AI", details: "3rd Year CSE, JNNCE", photoUrl: "/images/sharad-ai.jpg" },
-  { id: 10, name: "Shushanth S", details: "2nd Year CSE, KLE BVB Hubli", photoUrl: "/images/shushanth.png" },
-  { id: 11, name: "Siri M", details: "2nd Year ECE, BIT", photoUrl: "/images/siri-m.jpg" },
+  { id: 0, name: "Anirudh Nag C V", details: "2nd Year, CSE, Dr. AIT", photoUrl: "/images/anirudh-balaji.png" },
+  { id: 1, name: "Charan J", details: "2nd Year, ECE, UVCE", photoUrl: "/images/charan-j.png" },
+  { id: 2, name: "Darshan B K", details: "2nd Year, AIML, JNNCE", photoUrl: "/images/darshan.png" },
+  { id: 3, name: "Kushal M.Bharadwaj", details: "2nd Year, AI(DS), AIT", photoUrl: "/images/kushal.png" },
+  { id: 4, name: "Manjunath HD", details: "2nd Year, ETE, Dr. AIT", photoUrl: "/images/manjunath-hd.png" },
+  { id: 5, name: "Manoj H", details: "2nd Year, ECE, EPCET", photoUrl: "/images/manoj.png" },
+  { id: 6, name: "Manya S", details: "2nd Year, ECE, VVCE", photoUrl: "/images/manya-s.png" },
+  { id: 7, name: "Megharaj Banakar", details: "2nd Year, ECE, UVCE", photoUrl: "/images/megharaj-banakar.png" },
+  { id: 8, name: "Mohammed Ayan KK", details: "2nd Year, CS(DS), GMU", photoUrl: "/images/mohammed-ayan.png" },
+  { id: 9, name: "Mohith S", role: "Chief of Members", details: "2nd Year, EEE, Dr. AIT", photoUrl: "/images/mohith-s.jpg" },
+  { id: 10, name: "Poorvi TB", details: "2nd Year, CSE, Alva's IT", photoUrl: "/images/poorvi-tb.jpg" },
+  { id: 11, name: "Prajwal Biradar", details: "2nd Year, ETE, Dr. AIT", photoUrl: "/images/prajwal-biradar.png" },
+  { id: 12, name: "S Y Ganesh", details: "2nd Year, ETE, Dr. AIT", photoUrl: "/images/sy-ganesh.png" },
+  { id: 13, name: "Sanjay SB", details: "2nd Year, CS(AI), RVITM", photoUrl: "/images/sanjay-sb.png" },
+  { id: 14, name: "Sharad AI", details: "3rd Year, CSE, JNNCE", photoUrl: "/images/sharad-ai.jpg" },
+  { id: 15, name: "Shushanth S", details: "2nd Year, CSE, KLE BVB", photoUrl: "/images/shushanth.png" },
+  { id: 16, name: "Siri M", details: "2nd Year, ECE, BIT", photoUrl: "/images/siri-m.jpg" },
 ];
 
 function Avatar({ src, alt }: { src: string; alt: string }) {
